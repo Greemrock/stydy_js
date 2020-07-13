@@ -32,3 +32,7 @@ let personalMovieDB = {
     genres: [],
     privat: false
 };
+let lastWatchMovie = prompt('Один из последних просмотренных фильмов?'),
+    movieRating = prompt('На сколько оцениваете?');
+personalMovieDB.movies(lastWatchMovie);
+console.log(personalMovieDB);
