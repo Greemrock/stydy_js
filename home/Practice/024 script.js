@@ -58,7 +58,6 @@ const personalMovieDB = {
         }
     },
     writeYourGenres: function () {
-        
         // for (let i = 1; i <= 3; i++) {
         //     let gener = prompt(`Ваш любимый жанр под номером ${i}`);
 
@@ -76,7 +75,6 @@ const personalMovieDB = {
             let geners = prompt(`Ваш любимый жанр через запятую`).toLocaleLowerCase;
 
             if (geners === null || geners == "") {
-                
                 console.log("error_gener");
                 i--;
             } else {
