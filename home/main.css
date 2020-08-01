@@ -7,3 +7,19 @@
     width: 180px;
 
 };
+
+.btn-block {
+ width: auto;
+}
+
+button {
+    height: 50px;
+    width: 100px;
+}
+
+.blue {
+    background-color: blue;
+}
+.red {
+    background-color: red;
+}
