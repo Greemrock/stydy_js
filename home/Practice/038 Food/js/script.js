@@ -44,8 +44,7 @@ window.addEventListener('DOMContentLoaded', () => {
     //modal
 
     const modalTrigger = document.querySelectorAll('[data-modal]'),
-        modal = document.querySelector('.modal'),
-        modalCloseBtn = document.querySelector('[data-close]');
+        modal = document.querySelector('.modal');
 
     function openModal() {
         modal.classList.add('show');
@@ -64,10 +63,8 @@ window.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = '';
     }
 
-    modalCloseBtn.addEventListener('click', closeModal);
-
     modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
+        if (e.target === modal || e.target.getAttribute('data-close') == "") {
             closeModal();
         }
     }); 
@@ -78,7 +75,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // const modalTimerId = setTimeout(openModal, 5000);
+    const modalTimerId = setTimeout(openModal, 50000);
 
     function showModalByScroll() {
         if (window.pageYOffset + document.documentElement.clientHeight >= 
@@ -92,7 +89,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Timer
 
-    const deadLine = '2020-09-20';
+    const deadLine = '2020-09-29';
 
     function getTimeRemaining(endtime) {
         const t = Date.parse(endtime) - Date.parse(new Date()),
@@ -187,7 +184,7 @@ window.addEventListener('DOMContentLoaded', () => {
         "img/tabs/vegy.jpg",
         "vergy",
         'Меню "Фитнес"',
-        'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих        овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+        'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
         "9",
         '.menu .container'
     ).render();
@@ -209,4 +206,80 @@ window.addEventListener('DOMContentLoaded', () => {
         "12",
         '.menu .container'
     ).render();
+
+    // Forms 
+
+    const forms = document.querySelectorAll('form');
+
+    const message = {
+        loding: 'Загрузка',
+        seccess: 'Спасибо! Мы скоро свяжемся',
+        failure: 'Что-то пошло не так...'
+    };
+
+    forms.forEach(item => {
+        postData(item);
+    });
+
+    function postData(form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const statusMessage = document.createElement('div');
+            statusMessage.classList.add('status');
+            statusMessage.textContent = message.loading;
+            form.append(statusMessage);
+
+            const request = new XMLHttpRequest();
+            request.open('POST', 'server.php');
+
+            request.setRequestHeader('Content-type', 'application/json');
+            const formData = new FormData(form);
+            
+            const object = {};
+            formData.forEach(function(value, key){
+                object[key] = value;
+            });
+
+            const json = JSON.stringify(object);
+
+            request.send(json);
+
+            request.addEventListener('load', () => {
+                if (request.status === 200) {
+                    console.log(request.response);
+                    showThinksModal(message.seccess);
+                    form.reset();
+                    statusMessage.remove();
+                } else {
+                    showThinksModal(message.failure);
+                }
+            });
+        });
+    }
+
+    function showThinksModal(message) {
+        const prevModalDialog = document.querySelector('.modal__dialog');
+
+        prevModalDialog.classList.add('.hide');
+        openModal();
+
+        const thinksModal = document.createElement('div');
+        thinksModal.classList.add('modal__dialog');
+        thinksModal.innerHTML = `
+            <div class="modal__content">
+                <div class="modal__close">&times</div>
+                <div class="modal__title">${message}</div>
+            </div>
+        `;
+
+        document.querySelector('.modal').append(thinksModal);
+        setTimeout(() => {
+            thinksModal.remove();
+            prevModalDialog.classList.add('.show');
+            prevModalDialog.classList.remove('.hide');
+            closeModal();
+        }, 4000);
+    }
+
 });
