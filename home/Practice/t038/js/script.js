@@ -64,7 +64,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     modal.addEventListener('click', (e) => {
-        if (e.target === modal || e.target.getAttribute('data-close') == "") {
+        if (e.target === modal || e.target.getAttribute('data-close') == '') {
             closeModal();
         }
     }); 
@@ -212,7 +212,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const forms = document.querySelectorAll('form');
 
     const message = {
-        loding: 'Загрузка',
+        loding: 'img/form/spinner.svg',
         seccess: 'Спасибо! Мы скоро свяжемся',
         failure: 'Что-то пошло не так...'
     };
@@ -225,10 +225,13 @@ window.addEventListener('DOMContentLoaded', () => {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const statusMessage = document.createElement('div');
-            statusMessage.classList.add('status');
-            statusMessage.textContent = message.loading;
-            form.append(statusMessage);
+            const statusMessage = document.createElement('img');
+            statusMessage.src = message.loding;
+            statusMessage.style.cssText = `
+                display: block;
+                margin: 0 auto;
+            `;
+            form.insertAdjacentElement('afterend', statusMessage);
 
             const request = new XMLHttpRequest();
             request.open('POST', 'server.php');
@@ -261,14 +264,14 @@ window.addEventListener('DOMContentLoaded', () => {
     function showThinksModal(message) {
         const prevModalDialog = document.querySelector('.modal__dialog');
 
-        prevModalDialog.classList.add('.hide');
+        prevModalDialog.classList.add('hide');
         openModal();
 
         const thinksModal = document.createElement('div');
         thinksModal.classList.add('modal__dialog');
         thinksModal.innerHTML = `
             <div class="modal__content">
-                <div class="modal__close">&times</div>
+                <div data-close class="modal__close">&times</div>
                 <div class="modal__title">${message}</div>
             </div>
         `;
@@ -276,10 +279,10 @@ window.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.modal').append(thinksModal);
         setTimeout(() => {
             thinksModal.remove();
-            prevModalDialog.classList.add('.show');
-            prevModalDialog.classList.remove('.hide');
+            prevModalDialog.classList.add('show');
+            prevModalDialog.classList.remove('hide');
             closeModal();
-        }, 4000);
+        }, 5000);
     }
 
 });
