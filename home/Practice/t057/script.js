@@ -14,11 +14,11 @@
 
 // map
 
-const answers = ['IvAn', 'AnnA', 'Hello'];
+let answers = ['IvAn', 'AnnA', 'Hello'];
 
 //возвращает callback функцией item нижнего регистра
 
-const result = answers.map(item => item.toLocaleLowerCase());   
+answers = answers.map(item => item.toLocaleLowerCase());   
 
-console.log(result);
+console.log(answers);
 
