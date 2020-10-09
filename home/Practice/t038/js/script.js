@@ -310,95 +310,98 @@ window.addEventListener('DOMContentLoaded', () => {
   
   // my code =>>>
 
-  // let slideIndex = 0;
+  let slideIndex = 1;
 
-  // function hideSliderContent() {
-  //   slides.forEach(item => {
-  //     item.classList.add('hide');
-  //     item.classList.remove('show', 'fade');
-  //   });
-  // }
+
+
+  function hideSliderContent() {
+    slides.forEach(item => {
+      item.classList.add('hide');
+      item.classList.remove('show', 'fade');
+    });
+  }
   
-  // function showSliderContent(i = 0) { 
-  //   slides[i].classList.add('show', 'fade');
-  //   slides[i].classList.remove('hide');
-  // }
+  function showSliderContent(i = 0) { 
+    slides[i].classList.add('show', 'fade');
+    slides[i].classList.remove('hide');
+  }
 
-  // hideSliderContent();
-  // showSliderContent();
+  function counterMinus() {
+    slideIndex--;
+    if (slideIndex < 1) {
+      slideIndex = slides.length;
+    }
+    return `0${slideIndex}`;
+  }
 
-  // function counterMinus() {
-  //   slideIndex--;
-  //   if (slideIndex < 1) {
-  //     slideIndex = slides.length;
-  //   }
-  //   return `0${slideIndex}`;
-  // }
+  function counterPlus() {
+    ++slideIndex;
+    if (slideIndex > slides.length) {
+      slideIndex = 1;
+    }
+    return `0${slideIndex}`;
+  }
 
-  // function counterPlus() {
-  //   ++slideIndex;
-  //   if (slideIndex === slides.length + 1) {
-  //     slideIndex = 1;
-  //   }
-  //   return `0${slideIndex}`;
-  // }
+  hideSliderContent();
+  showSliderContent();
+  
+  total.innerHTML = `0${slides.length}`;
+  current.innerHTML = `0${slideIndex}`;
 
-  // total.innerHTML = `0${slides.length}`;
+  nextSlider.addEventListener('click', (e) => {
+    current.innerHTML = counterPlus();
+    hideSliderContent();
+    showSliderContent(slideIndex-1);
+  });
 
-  // nextSlider.addEventListener('click', (e) => {
-  //   current.innerHTML = counterPlus();
-  //   hideSliderContent();
-  //   showSliderContent(slideIndex-1);
-  // });
-
-  // prevSlider.addEventListener('click', (e) => {
-  //   current.innerHTML = counterMinus();
-  //   hideSliderContent();
-  //   showSliderContent(slideIndex-1);
-  // });
+  prevSlider.addEventListener('click', (e) => {
+    current.innerHTML = counterMinus();
+    hideSliderContent();
+    showSliderContent(slideIndex-1);
+  });
     
   //code task
 
-  let slideIndex = 1;
+  // let slideIndex = 1;
 
-  showSlides(slideIndex);
+  // showSlides(slideIndex);
 
-  if (slides.length < 10) {
-    total.textContent = `0${slides.length}`;
-  } else {
-    total.textContent = slides.length;
-  }
+  // if (slides.length < 10) {
+  //   total.textContent = `0${slides.length}`;
+  // } else {
+  //   total.textContent = slides.length;
+  // }
 
-  function showSlides(n)  {
-    if (n > slides.length)  {
-      slideIndex = 1;
-    }
+  // function showSlides(n)  {
+  //   if (n > slides.length)  {
+  //     slideIndex = 1;
+  //   }
 
-    if (n < 1)  {
-      slideIndex = slides.length;
-    }
+  //   if (n < 1)  {
+  //     slideIndex = slides.length;
+  //   }
 
-    slides.forEach(item => item.style.display = 'none');
+  //   slides.forEach(item => item.style.display = 'none');
 
-    slides[slideIndex - 1].style.display = 'block';
+  //   slides[slideIndex - 1].style.display = 'block';
 
-    if (slides.length < 10) {
-      current.textContent = `0${slideIndex}`;
-    } else {
-      current.textContent = slideIndex;
-    }
-  }
+  //   if (slides.length < 10) {
+  //     current.textContent = `0${slideIndex}`;
+  //   } else {
+  //     current.textContent = slideIndex;
+  //   }
+  // }
 
-  function plusSlides(n)  {
-    showSlides(slideIndex += n);
-  }
+  // function plusSlides(n)  {
+  //   showSlides(slideIndex += n);
+  // }
 
-  prevSlider.addEventListener('click', () =>  {
-    plusSlides(-1);
-  });
+  // prevSlider.addEventListener('click', () =>  {
+  //   plusSlides(-1);
+  // });
 
-  nextSlider.addEventListener('click', () =>  {
-    plusSlides(1);
-  });
+  // nextSlider.addEventListener('click', () =>  {
+  //   plusSlides(1);
+  // });
   
 });
