@@ -8,8 +8,6 @@ class User {
 
   #surname = "Posohov";   // # - свойство становится приватным
 
-  say = () => {
-    console.log(`Имя пользователя: ${this.name} ${this.#surname}, возраст ${this._age}`);
   }
 
   get age() {
@@ -25,7 +23,6 @@ class User {
   }
 }
 
-const ivan = new User('Ivan', 27);
 console.log(ivan.surname);
 
 ivan.say();
