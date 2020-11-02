@@ -1,6 +1,5 @@
-const myModule = require('./main');
+import {one, two} from './main.js';
+import sayHi from './main.js';
 
-const myModuleInstance = new myModule();
-
-myModuleInstance.hello();
-myModuleInstance.goodbye();
+console.log(`${one} and ${two}`);
+sayHi();
