@@ -1,15 +1,15 @@
-function slider() {
-    // Slider
+'use strict';
 
-    const slides = document.querySelectorAll('.offer__slide'),
-        slider = document.querySelector('.offer__slider'),
-        sliderCounter = document.querySelector('.offer__slider-counter'),
-        current = sliderCounter.querySelector('#current'),
-        total = sliderCounter.querySelector('#total'),
-        nextSlider = sliderCounter.querySelector('.offer__slider-next'),
-        prevSlider = sliderCounter.querySelector('.offer__slider-prev'),
-        slidesWrapper = document.querySelector('.offer__slider-wrapper'),
-        slidesField = document.querySelector('.offer__slider-inner'),
+function slider({container, slide, nextArrow, prevArrow, totalCounter, currentCounter, wrapper, field}) {
+
+    const slides = document.querySelectorAll(slide),
+        slider = document.querySelector(container),
+        current = document.querySelector(currentCounter),
+        total = document.querySelector(totalCounter),
+        nextSlider = document.querySelector(nextArrow),
+        prevSlider = document.querySelector(prevArrow),
+        slidesWrapper = document.querySelector(wrapper),
+        slidesField = document.querySelector(field),
         width = window.getComputedStyle(slidesWrapper).width;
 
     let slideIndex = 1;
@@ -142,8 +142,8 @@ function slider() {
 
             numberSliders();
             sliderDots();
-        })
-    })
+        });
+    });
 
     // my code =>>>
 
@@ -244,4 +244,4 @@ function slider() {
     // });
 }
 
-module.exports = slider;
+export default slider;

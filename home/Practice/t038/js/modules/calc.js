@@ -104,8 +104,6 @@ function calc() {
             }
             calcTotal();
         });
-
-        
     }
 
     getDinamicInformation('#height');
@@ -113,4 +111,4 @@ function calc() {
     getDinamicInformation('#age');
 }
 
-module.exports = calc;
+export default calc;
